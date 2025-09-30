@@ -1,0 +1,127 @@
+// Color system - Red theme
+$color-primary: #d32f2f; // red 700
+$color-primary-600: #c62828;
+$color-primary-500: #e53935;
+$color-primary-100: #ffebee;
+$color-bg: #0f0f0f;
+$color-surface: #161616;
+$color-text: #f5f5f5;
+$color-muted: #bdbdbd;
+
+// Spacing scale
+$space-1: 4px;
+$space-2: 8px;
+$space-3: 12px;
+$space-4: 16px;
+$space-5: 24px;
+$space-6: 32px;
+$space-8: 48px;
+
+// Typography
+$font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+
+* { box-sizing: border-box; }
+html, body, #app { height: 100%; }
+body {
+  margin: 0;
+  font-family: $font-family;
+  color: $color-text;
+  background: linear-gradient(180deg, #121212 0%, #0b0b0b 100%);
+}
+
+a { color: $color-primary-500; text-decoration: none; }
+a:hover { color: $color-primary; }
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $space-5;
+}
+
+// Reusable button styles
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-2;
+  height: 44px;
+  padding: 0 $space-5;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: $color-text;
+  background: linear-gradient(180deg, $color-primary-500, $color-primary);
+  box-shadow: 0 10px 20px rgba(211, 47, 47, 0.25), inset 0 1px 0 rgba(255,255,255,0.15);
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .2s ease, filter .2s ease;
+}
+.btn:hover { filter: brightness(1.05); transform: translateY(-1px); }
+.btn:active { transform: translateY(0); box-shadow: 0 6px 12px rgba(211,47,47,.25); }
+.btn--outline {
+  background: transparent;
+  border-color: rgba(211, 47, 47, 0.6);
+}
+.btn--ghost {
+  background: rgba(211,47,47,0.1);
+  border-color: transparent;
+}
+
+// Navbar
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(16,16,16,0.7);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.navbar__inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+.navbar__brand { display: flex; align-items: center; gap: $space-3; font-weight: 800; letter-spacing: .5px; }
+.brand__dot { width: 10px; height: 10px; border-radius: 50%; background: $color-primary; box-shadow: 0 0 10px rgba(211,47,47,.8); }
+.nav { display: flex; align-items: center; gap: $space-4; }
+.nav a { color: $color-text; opacity: .9; }
+.nav a.active { color: $color-primary-500; }
+
+// Footer
+.footer {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  background: $color-surface;
+  color: $color-muted;
+  margin-top: $space-8;
+}
+.footer__inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+
+// Page sections
+.page {
+  padding: $space-8 0;
+}
+.hero {
+  padding: 80px 0 56px;
+  text-align: center;
+}
+.hero h1 { margin: 0 0 $space-3; font-size: 44px; }
+.hero p { margin: 0 auto $space-5; max-width: 760px; color: $color-muted; }
+.hero__cta { display: flex; gap: $space-3; justify-content: center; flex-wrap: wrap; }
+
+.card {
+  background: $color-surface;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  padding: $space-5;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+}
+
+/* Make welcome text highly visible in navbar */
+.nav-buttons .welcome-text {
+  font-weight: 700;
+  font-size: 16px;
+  color: lightgreen !important;
+  /* bright red for contrast */
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+  /* subtle glow */
+  margin-right: 12px;
+}
+
+

@@ -1,0 +1,250 @@
+/* UserDashboard.css */
+
+/* Global page container */
+.page {
+    min-height: 80vh;
+    background: #0f0f0f;
+    color: #f5f5f5;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+/* Horizontal Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    height: 64px;
+    background: #161616;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar__brand {
+    font-weight: 800;
+    font-size: 1.4rem;
+    color: #e53935;
+}
+
+.nav button {
+    background: none;
+    border: none;
+    color: #f5f5f5;
+    font-weight: 600;
+    margin-left: 16px;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.nav button:hover {
+    background: rgba(211, 47, 47, 0.2);
+}
+
+.nav button.active {
+    background: #e53935;
+    color: #fff;
+}
+
+/* Dashboard content */
+.dashboard-content {
+    padding: 24px;
+}
+
+/* Notifications list */
+.notification-item {
+    background: #161616;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 12px 16px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.notification-item:hover {
+    background: rgba(211, 47, 47, 0.1);
+}
+
+/* Request history grid */
+.request-history-grid {
+    display: grid;
+    gap: 12px;
+}
+
+.request-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: #161616;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.request-id {
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.request-summary {
+    opacity: 0.8;
+    margin-bottom: 4px;
+}
+
+.request-status {
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.request-status.approved {
+    color: #66bb6a;
+    background: rgba(102, 187, 106, 0.1);
+}
+
+.request-status.rejected {
+    color: #e53935;
+    background: rgba(229, 57, 53, 0.1);
+}
+
+.request-status.pending {
+    color: #ffa726;
+    background: rgba(255, 167, 38, 0.1);
+}
+
+/* Hospitals section */
+.dashboard-content h2 {
+    margin-bottom: 16px;
+}
+
+.dashboard-content p {
+    color: #bdbdbd;
+}
+
+/* Notifications Page */
+.notifications-page {
+  padding: 16px;
+}
+
+.notifications-page h2 {
+  color: #f5f5f5;
+  margin-bottom: 16px;
+}
+
+.notifications-page ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.notifications-page li {
+  background-color: #161616; /* dark surface */
+  color: #f5f5f5; /* white text */
+  border: 1px solid #444; /* subtle border */
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 8px;
+  transition: background 0.2s ease;
+}
+
+.notifications-page li:hover {
+  background-color: #1e1e1e; /* slightly lighter on hover */
+}
+
+.notifications-page li strong {
+  margin-right: 8px;
+  font-weight: 700;
+}
+
+/* Status colors */
+.notifications-page li .status-approved {
+  color: #66bb6a; /* green */
+}
+
+.notifications-page li .status-rejected {
+  color: #e53935; /* red */
+}
+
+.notifications-page li .status-pending,
+.notifications-page li .status-broadcast {
+  color: #d32f2f; /* red theme for pending/broadcast */
+}
+
+.notifications-page .timestamp {
+  font-size: 12px;
+  opacity: 0.7;
+  margin-top: 4px;
+}
+/* Requests Page */
+.requests-page {
+    padding: 16px;
+    color: #f5f5f5;
+}
+
+.requests-page h2 {
+    color: #f5f5f5;
+    margin-bottom: 16px;
+}
+
+.requests-list {
+    display: grid;
+    gap: 12px;
+}
+
+.request-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border-radius: 8px;
+    background-color: #161616;
+    /* dark card background */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    transition: background 0.2s ease;
+}
+
+.request-card:hover {
+    background-color: #1e1e1e;
+}
+
+.request-card div {
+    color: #f5f5f5;
+}
+
+.hospital-name {
+    font-weight: 700;
+}
+
+.summary {
+    opacity: 0.8;
+    margin-top: 4px;
+}
+
+.created-at {
+    font-size: 12px;
+    opacity: 0.6;
+    margin-top: 2px;
+}
+
+.status {
+    font-weight: 700;
+}
+
+.status-approved {
+    color: #66bb6a;
+    /* green */
+}
+
+.status-rejected {
+    color: #e53935;
+    /* red */
+}
+
+.status-pending {
+    color: #ffa726;
+    /* orange */
+}

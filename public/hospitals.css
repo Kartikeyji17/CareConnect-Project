@@ -1,0 +1,140 @@
+/* Hospitals Page Specific Styles */
+.hospitals-section {
+    padding: 4rem 0;
+}
+
+.hospitals-section h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.section-description {
+    color: var(--muted);
+    max-width: 800px;
+    margin-bottom: 2rem;
+}
+
+/* Search and Filter Section */
+.search-filter {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border: 1px solid var(--border);
+}
+
+.filter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.filter-item label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.filter-item input, .filter-item select {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    background-color: var(--secondary);
+    color: var(--foreground);
+}
+
+.filter-buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Hospital Cards */
+.hospital-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.hospital-card {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+}
+
+.hospital-info {
+    margin-bottom: 1.5rem;
+}
+
+.hospital-info h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.hospital-address {
+    color: var(--muted);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.hospital-address i {
+    margin-right: 0.5rem;
+}
+
+.hospital-contact {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    color: var(--muted);
+}
+
+.hospital-contact i {
+    margin-right: 0.5rem;
+}
+
+.hospital-services {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.service-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+}
+
+.service-tag i {
+    margin-right: 0.25rem;
+}
+
+.service-tag.available {
+    background-color: rgba(76, 175, 80, 0.1);
+    color: #4caf50;
+}
+
+.service-tag.unavailable {
+    background-color: rgba(158, 158, 158, 0.1);
+    color: #9e9e9e;
+}
+
+.hospital-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.hospital-actions button {
+    flex: 1;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .hospital-actions {
+        flex-direction: column;
+    }
+}
