@@ -7,7 +7,7 @@ import {
   onSnapshot,
   orderBy,
 } from "firebase/firestore";
-import "../styles/UserDashboard.css";
+import "../styles/userdashboard.css";
 
 type Request = {
   id: string;

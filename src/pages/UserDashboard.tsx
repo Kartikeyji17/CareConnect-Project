@@ -3,7 +3,7 @@ import ProfilePage from "../pages/ProfilePage";
 import NotificationsPage from "../pages/NotificationsPage";
 import RequestHistoryPage from "../pages/RequestsPage";
 import HospitalsPage from "../pages/HospitalsPage";
-import "../styles/UserDashboard.css";
+import "../styles/userdashboard.css";
 
 export default function UserDashboard(): React.JSX.Element {
   const [activeTab, setActiveTab] = useState<
