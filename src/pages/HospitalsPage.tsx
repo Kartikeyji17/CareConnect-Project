@@ -2,11 +2,9 @@ import React, { useEffect, useState } from "react";
 import { db, auth } from "./firebase";
 import {
   collection,
-  getDocs,
   addDoc,
   serverTimestamp,
   onSnapshot,
-  doc,
 } from "firebase/firestore";
 import "../styles/hospitalsPage.css";
 
@@ -56,41 +54,6 @@ export default function HospitalsPage(): React.JSX.Element {
 
   const [note, setNote] = useState("");
 
-  const sampleHospitals: Hospital[] = [
-    {
-      id: "1",
-      name: "Rajendra Hospital",
-      address: "MMUT Gorakhpur",
-      contact: "+91 555 123 4567",
-      distance: 2.3,
-      resources: { blood: 5, medicine: 10, oxygen: 2, beds: 6 },
-    },
-    {
-      id: "2",
-      name: "CityLife Hospital",
-      address: "Subabazaar, Gorakhpur",
-      contact: "+91 555 987 6543",
-      distance: 4.1,
-      resources: { blood: 3, medicine: 7, oxygen: 0, beds: 2 },
-    },
-    {
-      id: "3",
-      name: "Shree Hospital",
-      address: "Raneedeeha, Gorakhpur",
-      contact: "+91 555 456 7890",
-      distance: 5.8,
-      resources: { blood: 0, medicine: 6, oxygen: 3, beds: 0 },
-    },
-    {
-      id: "4",
-      name: "Northern Medical Institute",
-      address: "KunraGhat, Gorakhpur",
-      contact: "+91 555 234 5678",
-      distance: 7.2,
-      resources: { blood: 4, medicine: 0, oxygen: 1, beds: 4 },
-    },
-  ];
-
   // --- Fetch hospitals with real-time updates and safe defaults ---
   useEffect(() => {
     setLoading(true);
@@ -120,17 +83,11 @@ export default function HospitalsPage(): React.JSX.Element {
           };
         });
 
-        setHospitals([
-          ...sampleHospitals.filter(
-            (s) => !hospitalList.find((h) => h.id === s.id)
-          ),
-          ...hospitalList,
-        ]);
+        setHospitals(hospitalList);
         setLoading(false);
       },
       (err) => {
         console.error("Error fetching hospitals:", err);
-        setHospitals(sampleHospitals);
         setLoading(false);
       }
     );

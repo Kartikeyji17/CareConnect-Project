@@ -51,7 +51,7 @@ export default function AdminDashboard(): React.JSX.Element {
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "users"), snapshot => {
       const data = snapshot.docs.map(doc => ({ id: doc.id, ...(doc.data() as Omit<User,"id">) }));
-      setUsers(prev => [...sampleUsers.filter(s => !data.find(d => d.id === s.id)), ...data]);
+      setUsers([...sampleUsers.filter(s => !data.find(d => d.id === s.id)), ...data]);
     });
     return unsubscribe;
   }, []);
@@ -59,7 +59,7 @@ export default function AdminDashboard(): React.JSX.Element {
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "hospitals"), snapshot => {
       const data = snapshot.docs.map(doc => ({ id: doc.id, ...(doc.data() as Omit<Hospital,"id">) }));
-      setHospitals(prev => [...sampleHospitals.filter(s => !data.find(d => d.id === s.id)), ...data]);
+      setHospitals([...sampleHospitals.filter(s => !data.find(d => d.id === s.id)), ...data]);
     });
     return unsubscribe;
   }, []);
@@ -67,7 +67,7 @@ export default function AdminDashboard(): React.JSX.Element {
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "requests"), snapshot => {
       const data = snapshot.docs.map(doc => ({ id: doc.id, ...(doc.data() as Omit<Request,"id">) }));
-      setRequests(prev => [...sampleRequests.filter(s => !data.find(d => d.id === s.id)), ...data]);
+      setRequests([...sampleRequests.filter(s => !data.find(d => d.id === s.id)), ...data]);
     });
     return unsubscribe;
   }, []);
@@ -75,7 +75,7 @@ export default function AdminDashboard(): React.JSX.Element {
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "traffic"), snapshot => {
       const data = snapshot.docs.map(doc => ({ id: doc.id, ...(doc.data() as Omit<Traffic,"id">) }));
-      setTraffic(prev => [...sampleTraffic.filter(s => !data.find(d => d.id === s.id)), ...data]);
+      setTraffic([...sampleTraffic.filter(s => !data.find(d => d.id === s.id)), ...data]);
     });
     return unsubscribe;
   }, []);
@@ -83,7 +83,7 @@ export default function AdminDashboard(): React.JSX.Element {
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "announcements"), snapshot => {
       const data = snapshot.docs.map(doc => ({ id: doc.id, ...(doc.data() as Omit<Announcement,"id">) }));
-      setAnnouncements(prev => [...sampleAnnouncements.filter(s => !data.find(d => d.id === s.id)), ...data]);
+      setAnnouncements([...sampleAnnouncements.filter(s => !data.find(d => d.id === s.id)), ...data]);
     });
     return unsubscribe;
   }, []);
