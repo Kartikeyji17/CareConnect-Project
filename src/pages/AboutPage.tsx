@@ -91,7 +91,7 @@ export default function AboutPage(): React.JSX.Element {
           <div className="team-grid">
             <div className="team-member">
               <div className="member-image">
-                <img src="./src/images/Kartikey.jpg" alt="Kartikey Chaturvedi" />
+                <img src="/images/Kartikey.jpg" alt="Kartikey Chaturvedi" />
               </div>
               <h3>Kartikey Chaturvedi</h3>
               <p className="member-role">Founder & CEO</p>
@@ -103,7 +103,7 @@ export default function AboutPage(): React.JSX.Element {
             </div>
             <div className="team-member">
               <div className="member-image">
-                <img src="./src/images/Anurag.jpg" alt="Anurag Yadav" />
+                <img src="/images/Anurag.jpg" alt="Anurag Yadav" />
               </div>
               <h3>Anurag Yadav</h3>
               <p className="member-role">Frontend Lead</p>
@@ -115,7 +115,7 @@ export default function AboutPage(): React.JSX.Element {
             </div>
             <div className="team-member">
               <div className="member-image">
-                <img src="./src/images/Aditya.jpg" alt="Aditya Singh Kshatri" />
+                <img src="/images/Aditya.jpg" alt="Aditya Singh Kshatri" />
               </div>
               <h3>Aditya Singh Kshatri</h3>
               <p className="member-role">Backend Manager</p>
