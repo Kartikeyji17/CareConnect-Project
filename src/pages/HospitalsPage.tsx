@@ -6,7 +6,7 @@ import {
   serverTimestamp,
   onSnapshot,
 } from "firebase/firestore";
-import "../styles/hospitalsPage.css";
+import "../styles/hospitalspage.css";
 
 type Hospital = {
   id: string;
