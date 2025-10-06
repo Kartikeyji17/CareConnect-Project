@@ -149,15 +149,36 @@ export default function AdminDashboard(): React.JSX.Element {
   const addAnnouncement = async () => {
     if (!newAnnouncement.trim()) return;
     try {
-      await addDoc(collection(db, "announcements"), {
+      // 1. Add announcement to announcements collection
+      const docRef = await addDoc(collection(db, "announcements"), {
         message: newAnnouncement,
         createdAt: serverTimestamp(),
       });
+
+      console.log("Announcement added:", {
+        id: docRef.id,
+        message: newAnnouncement,
+      });
+
+      // 2. Send as notification to all users
+      users.forEach(async (user) => {
+        await addDoc(collection(db, "notifications"), {
+          userId: user.id,
+          type: "notification",
+          summary: newAnnouncement,
+          createdAt: serverTimestamp(),
+          read: false, // unread by default
+        });
+        console.log(`Sent notification to ${user.name} (${user.email})`);
+      });
+
+      // 3. Clear input
       setNewAnnouncement("");
     } catch (err) {
-      console.error(err);
+      console.error("Error adding announcement:", err);
     }
   };
+
 
   const deleteAnnouncement = async (id: string) => {
     try {
