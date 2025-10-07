@@ -19,12 +19,22 @@
     height: 64px;
     background: #161616;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    flex-wrap: wrap;
+    transition: all 0.3s ease;
 }
 
 .navbar__brand {
     font-weight: 800;
     font-size: 1.4rem;
     color: #e53935;
+    transition: all 0.3s ease;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    transition: all 0.3s ease;
 }
 
 .nav button {
@@ -37,6 +47,7 @@
     padding: 8px 12px;
     border-radius: 8px;
     transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
 }
 
 .nav button:hover {
@@ -126,58 +137,59 @@
 
 /* Notifications Page */
 .notifications-page {
-  padding: 16px;
+    padding: 16px;
 }
 
 .notifications-page h2 {
-  color: #f5f5f5;
-  margin-bottom: 16px;
+    color: #f5f5f5;
+    margin-bottom: 16px;
 }
 
 .notifications-page ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .notifications-page li {
-  background-color: #161616; /* dark surface */
-  color: #f5f5f5; /* white text */
-  border: 1px solid #444; /* subtle border */
-  border-radius: 8px;
-  padding: 12px;
-  margin-bottom: 8px;
-  transition: background 0.2s ease;
+    background-color: #161616;
+    color: #f5f5f5;
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 8px;
+    transition: background 0.2s ease;
 }
 
 .notifications-page li:hover {
-  background-color: #1e1e1e; /* slightly lighter on hover */
+    background-color: #1e1e1e;
 }
 
 .notifications-page li strong {
-  margin-right: 8px;
-  font-weight: 700;
+    margin-right: 8px;
+    font-weight: 700;
 }
 
 /* Status colors */
 .notifications-page li .status-approved {
-  color: #66bb6a; /* green */
+    color: #66bb6a;
 }
 
 .notifications-page li .status-rejected {
-  color: #e53935; /* red */
+    color: #e53935;
 }
 
 .notifications-page li .status-pending,
 .notifications-page li .status-broadcast {
-  color: #d32f2f; /* red theme for pending/broadcast */
+    color: #d32f2f;
 }
 
 .notifications-page .timestamp {
-  font-size: 12px;
-  opacity: 0.7;
-  margin-top: 4px;
+    font-size: 12px;
+    opacity: 0.7;
+    margin-top: 4px;
 }
+
 /* Requests Page */
 .requests-page {
     padding: 16px;
@@ -201,7 +213,6 @@
     padding: 12px;
     border-radius: 8px;
     background-color: #161616;
-    /* dark card background */
     border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
     transition: background 0.2s ease;
@@ -236,15 +247,60 @@
 
 .status-approved {
     color: #66bb6a;
-    /* green */
 }
 
 .status-rejected {
     color: #e53935;
-    /* red */
 }
 
 .status-pending {
     color: #ffa726;
-    /* orange */
+}
+
+/* ✅ RESPONSIVE FIXES */
+@media (max-width: 900px) {
+    .navbar {
+        padding: 0 16px;
+    }
+
+    .navbar__brand {
+        font-size: 1.2rem;
+    }
+
+    .nav button {
+        margin-left: 10px;
+        padding: 6px 10px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 700px) {
+    .navbar__brand {
+        opacity: 0;
+        pointer-events: none;
+        width: 0;
+    }
+
+    .nav {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .nav button {
+        margin: 4px 6px;
+        padding: 6px 8px;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav button {
+        margin: 2px 4px;
+        padding: 5px 6px;
+        font-size: 0.8rem;
+    }
+
+    .dashboard-content {
+        padding: 16px;
+    }
 }

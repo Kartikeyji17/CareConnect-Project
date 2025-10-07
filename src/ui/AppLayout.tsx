@@ -10,6 +10,7 @@ export default function AppLayout(): React.JSX.Element {
   const [role, setRole] = useState<
     "user" | "hospital" | "admin" | "donor" | null
   >(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     // Listen for auth state changes
@@ -56,6 +57,7 @@ export default function AppLayout(): React.JSX.Element {
             <i className="fas fa-heartbeat"></i>
             <h1>CareConnect</h1>
           </div>
+
           <nav>
             <ul className="nav-links">
               <li>
@@ -64,28 +66,24 @@ export default function AppLayout(): React.JSX.Element {
                 </NavLink>
               </li>
 
-              {/* User Dashboard for logged-in users */}
               {role === "user" && (
                 <li>
                   <NavLink to="/user-dashboard">User Dashboard</NavLink>
                 </li>
               )}
 
-              {/* Non-logged-in users see Find Hospitals */}
               {!role && (
                 <li>
                   <NavLink to="/hospitals">Find Hospitals</NavLink>
                 </li>
               )}
 
-              {/* Show Hospital Dashboard for hospital users */}
               {role === "hospital" && (
                 <li>
                   <NavLink to="/hospital-dashboard">Dashboard</NavLink>
                 </li>
               )}
 
-              {/* Show Admin Dashboard for admin */}
               {role === "admin" && (
                 <li>
                   <NavLink to="/admin-dashboard">Admin Dashboard</NavLink>
@@ -119,11 +117,117 @@ export default function AppLayout(): React.JSX.Element {
               <button className="btn btn-primary">Emergency Help</button>
             </div>
 
-            <div className="menu-toggle">
+            {/* Mobile Hamburger */}
+            <div
+              className="menu-toggle"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
               <i className="fas fa-bars"></i>
             </div>
           </nav>
         </div>
+
+        {/* ✅ Mobile Dropdown */}
+        {mobileMenuOpen && (
+          <div className="mobile-menu">
+            <ul>
+              <li>
+                <NavLink to="/" onClick={() => setMobileMenuOpen(false)}>
+                  Home
+                </NavLink>
+              </li>
+
+              {role === "user" && (
+                <li>
+                  <NavLink
+                    to="/user-dashboard"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    User Dashboard
+                  </NavLink>
+                </li>
+              )}
+
+              {!role && (
+                <li>
+                  <NavLink
+                    to="/hospitals"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Find Hospitals
+                  </NavLink>
+                </li>
+              )}
+
+              {role === "hospital" && (
+                <li>
+                  <NavLink
+                    to="/hospital-dashboard"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Dashboard
+                  </NavLink>
+                </li>
+              )}
+
+              {role === "admin" && (
+                <li>
+                  <NavLink
+                    to="/admin-dashboard"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Admin Dashboard
+                  </NavLink>
+                </li>
+              )}
+
+              <li>
+                <NavLink
+                  to="/services"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Services
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/about" onClick={() => setMobileMenuOpen(false)}>
+                  About
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/contact" onClick={() => setMobileMenuOpen(false)}>
+                  Contact
+                </NavLink>
+              </li>
+            </ul>
+
+            <div className="mobile-buttons">
+              {userName ? (
+                <>
+                  <span className="welcome-text">Welcome, {userName}</span>
+                  <button
+                    className="btn btn-outline"
+                    onClick={() => {
+                      handleLogout();
+                      setMobileMenuOpen(false);
+                    }}
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <NavLink
+                  to="/login"
+                  className="btn btn-outline"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Log In
+                </NavLink>
+              )}
+              <button className="btn btn-primary">Emergency Help</button>
+            </div>
+          </div>
+        )}
       </header>
 
       <main>
