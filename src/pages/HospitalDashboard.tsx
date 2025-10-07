@@ -10,6 +10,8 @@ import {
   where,
   addDoc,
   getDoc,
+  getDocs,
+  serverTimestamp,
 } from "firebase/firestore";
 import "../styles/hospitalsdashboard.css";
 
@@ -43,12 +45,6 @@ type Notification = {
   message: string;
   type: "warning" | "info" | "success" | "error";
   timestamp: any;
-};
-type Broadcast = {
-  id: string;
-  message: string;
-  timestamp: any;
-  urgent: boolean;
 };
 
 export default function HospitalDashboard(): React.JSX.Element {
@@ -122,7 +118,7 @@ export default function HospitalDashboard(): React.JSX.Element {
     return () => unsubscribe();
   }, [hospitalId]);
 
-  // Fetch Requests (Updated)
+  // Fetch Requests
   useEffect(() => {
     if (!hospitalId) return;
 
@@ -137,7 +133,6 @@ export default function HospitalDashboard(): React.JSX.Element {
           snap.docs.map(async (docSnap) => {
             const data = docSnap.data() as any;
 
-            // Use requesterName if present; otherwise fetch from users collection
             let userName = data.requesterName || "Unknown User";
             if (!data.requesterName && data.requesterId) {
               try {
@@ -153,7 +148,6 @@ export default function HospitalDashboard(): React.JSX.Element {
               }
             }
 
-            // Get items from data.items
             const items = data.items || {};
             const details: string[] = [];
             if (items.blood && items.blood > 0)
@@ -184,7 +178,7 @@ export default function HospitalDashboard(): React.JSX.Element {
     return () => unsubscribe();
   }, [hospitalId]);
 
-  // Notifications
+  // Notifications based on supplies
   useEffect(() => {
     const newNotifications: Notification[] = [];
     if (supplies.oxygen < 10)
@@ -240,18 +234,45 @@ export default function HospitalDashboard(): React.JSX.Element {
     }
   };
 
-  // Broadcast
+  // Broadcast to all users
   const sendBroadcast = async () => {
-    if (!newBroadcast.trim()) return;
-    const broadcast: Omit<Broadcast, "id"> = {
-      message: newBroadcast,
-      timestamp: new Date(),
-      urgent: isUrgent,
-    };
+    if (!newBroadcast.trim() || !hospitalId) return;
     try {
-      await addDoc(collection(db, "broadcasts"), broadcast);
+      const hospitalName = profile.name || "Unnamed Hospital";
+
+      // Fetch all users
+      const usersSnap = await getDocs(collection(db, "users"));
+      const users = usersSnap.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      // Send notification to each user
+      await Promise.all(
+        users.map(async (user) => {
+          await addDoc(collection(db, "notifications"), {
+            message: newBroadcast,
+            senderType: "hospital",
+            senderName: hospitalName,
+            userId: user.id,
+            timestamp: serverTimestamp(),
+            read: false,
+            urgent: isUrgent,
+          });
+        })
+      );
+
+      // Optionally store in hospital broadcasts collection
+      await addDoc(collection(db, "broadcasts"), {
+        message: newBroadcast,
+        senderName: hospitalName,
+        timestamp: serverTimestamp(),
+        urgent: isUrgent,
+      });
+
       setNewBroadcast("");
       setIsUrgent(false);
+      alert("Broadcast sent to all users successfully!");
     } catch (err) {
       console.error("Error sending broadcast:", err);
     }
