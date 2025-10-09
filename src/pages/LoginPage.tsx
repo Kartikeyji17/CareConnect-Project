@@ -7,6 +7,7 @@ import {
   signInWithPopup,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  sendPasswordResetEmail, // <-- imported for forgot password
 } from "firebase/auth";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 
@@ -15,33 +16,25 @@ export default function LoginPage(): React.JSX.Element {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  // --- Helper to route based on role ---
   const redirectUser = (role: string) => {
     if (role === "admin") navigate("/admin-dashboard");
     else if (role === "hospital") navigate("/hospital-dashboard");
     else navigate("/user-dashboard");
   };
 
-  // --- Google login handler ---
   const handleGoogleLogin = async () => {
     const provider = new GoogleAuthProvider();
     try {
       setLoading(true);
       const result = await signInWithPopup(auth, provider);
-
-      // 🔑 Check if admin
       if (result.user.email === "admin@careconnect.com") {
         redirectUser("admin");
         return;
       }
-
       const userRef = doc(db, "users", result.user.uid);
       const userSnap = await getDoc(userRef);
-
       let role: string;
-
       if (!userSnap.exists()) {
-        // If new user, default to "user"
         role = "user";
         await setDoc(userRef, {
           uid: result.user.uid,
@@ -51,9 +44,9 @@ export default function LoginPage(): React.JSX.Element {
           type: role,
         });
       } else {
-        role = userSnap.data()?.type || getRoleFromEmail(result.user.email || "");
+        role =
+          userSnap.data()?.type || getRoleFromEmail(result.user.email || "");
       }
-
       redirectUser(role);
     } catch (err) {
       console.error(err);
@@ -63,17 +56,23 @@ export default function LoginPage(): React.JSX.Element {
     }
   };
 
-  // --- Email/password login handler ---
   const handleEmailLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const email = (e.currentTarget.elements.namedItem("login-email") as HTMLInputElement).value;
-    const password = (e.currentTarget.elements.namedItem("login-password") as HTMLInputElement).value;
+    const email = (
+      e.currentTarget.elements.namedItem("login-email") as HTMLInputElement
+    ).value;
+    const password = (
+      e.currentTarget.elements.namedItem("login-password") as HTMLInputElement
+    ).value;
 
     try {
       setLoading(true);
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
 
-      // 🔑 Check if admin
       if (email === "admin@careconnect.com") {
         redirectUser("admin");
         return;
@@ -86,7 +85,7 @@ export default function LoginPage(): React.JSX.Element {
       if (userSnap.exists()) {
         role = userSnap.data()?.type || getRoleFromEmail(email);
       } else {
-        role = getRoleFromEmail(email); // fallback if no DB entry
+        role = getRoleFromEmail(email);
       }
 
       redirectUser(role);
@@ -98,17 +97,30 @@ export default function LoginPage(): React.JSX.Element {
     }
   };
 
-  // --- Registration handler ---
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const name = (e.currentTarget.elements.namedItem("register-name") as HTMLInputElement).value;
-    const email = (e.currentTarget.elements.namedItem("register-email") as HTMLInputElement).value;
-    const password = (e.currentTarget.elements.namedItem("register-password") as HTMLInputElement).value;
-    const type = (e.currentTarget.elements.namedItem("register-type") as HTMLSelectElement).value;
+    const name = (
+      e.currentTarget.elements.namedItem("register-name") as HTMLInputElement
+    ).value;
+    const email = (
+      e.currentTarget.elements.namedItem("register-email") as HTMLInputElement
+    ).value;
+    const password = (
+      e.currentTarget.elements.namedItem(
+        "register-password"
+      ) as HTMLInputElement
+    ).value;
+    const type = (
+      e.currentTarget.elements.namedItem("register-type") as HTMLSelectElement
+    ).value;
 
     try {
       setLoading(true);
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
 
       await setDoc(doc(db, "users", userCredential.user.uid), {
         uid: userCredential.user.uid,
@@ -117,7 +129,6 @@ export default function LoginPage(): React.JSX.Element {
         type,
       });
 
-      // 🔑 If someone registers with the admin email, force role admin
       if (email === "admin@careconnect.com") {
         redirectUser("admin");
       } else {
@@ -131,6 +142,18 @@ export default function LoginPage(): React.JSX.Element {
     }
   };
 
+  // --- Forgot Password Handler ---
+  const handleForgotPassword = async () => {
+    const email = prompt("Enter your registered email for password reset:");
+    if (!email) return;
+    try {
+      await sendPasswordResetEmail(auth, email);
+      alert("Password reset email sent! Check your inbox.");
+    } catch (err: any) {
+      alert("Error: " + err.message);
+    }
+  };
+
   return (
     <section className="login-section">
       <div className="container">
@@ -140,7 +163,9 @@ export default function LoginPage(): React.JSX.Element {
             <div className="login-quote">
               <h2>Saving Lives Together</h2>
               <p>
-                "In emergency situations, every second counts. We're here to connect you with the resources you need, when you need them most."
+                "In emergency situations, every second counts. We're here to
+                connect you with the resources you need, when you need them
+                most."
               </p>
             </div>
           </div>
@@ -154,7 +179,9 @@ export default function LoginPage(): React.JSX.Element {
                 Login
               </button>
               <button
-                className={`tab-btn ${activeTab === "register" ? "active" : ""}`}
+                className={`tab-btn ${
+                  activeTab === "register" ? "active" : ""
+                }`}
                 onClick={() => setActiveTab("register")}
               >
                 Register
@@ -176,12 +203,7 @@ export default function LoginPage(): React.JSX.Element {
                         type="email"
                         placeholder="Enter your email"
                         required
-                        style={{
-                          paddingLeft: '2.5rem',
-                          textIndent: '0',
-                          position: 'relative',
-                          zIndex: 1
-                        }}
+                        style={{ paddingLeft: "2.5rem" }}
                       />
                     </div>
                   </div>
@@ -196,17 +218,23 @@ export default function LoginPage(): React.JSX.Element {
                         type="password"
                         placeholder="Enter your password"
                         required
-                        style={{
-                          paddingLeft: '2.5rem',
-                          textIndent: '0',
-                          position: 'relative',
-                          zIndex: 1
-                        }}
+                        style={{ paddingLeft: "2.5rem" }}
                       />
                     </div>
                   </div>
 
-                  <button className="btn btn-primary btn-block" type="submit" disabled={loading}>
+                  {/* ✅ Forgot Password Link */}
+                  <p style={{ textAlign: "right", marginBottom: "1rem" }}>
+                    <a href="#" onClick={handleForgotPassword}>
+                      Forgot Password?
+                    </a>
+                  </p>
+
+                  <button
+                    className="btn btn-primary btn-block"
+                    type="submit"
+                    disabled={loading}
+                  >
                     {loading ? "Logging in..." : "Login"}
                   </button>
 
@@ -232,6 +260,7 @@ export default function LoginPage(): React.JSX.Element {
                 <h2>Create Account</h2>
                 <p>Join our emergency response network</p>
                 <form className="auth-form" onSubmit={handleRegister}>
+                  {/* Registration form unchanged */}
                   <div className="form-group">
                     <label htmlFor="register-name">Full Name</label>
                     <div className="input-with-icon">
@@ -241,12 +270,7 @@ export default function LoginPage(): React.JSX.Element {
                         name="register-name"
                         placeholder="Enter your full name"
                         required
-                        style={{
-                          paddingLeft: '2.5rem',
-                          textIndent: '0',
-                          position: 'relative',
-                          zIndex: 1
-                        }}
+                        style={{ paddingLeft: "2.5rem" }}
                       />
                     </div>
                   </div>
@@ -261,12 +285,7 @@ export default function LoginPage(): React.JSX.Element {
                         type="email"
                         placeholder="Enter your email"
                         required
-                        style={{
-                          paddingLeft: '2.5rem',
-                          textIndent: '0',
-                          position: 'relative',
-                          zIndex: 1
-                        }}
+                        style={{ paddingLeft: "2.5rem" }}
                       />
                     </div>
                   </div>
@@ -281,12 +300,7 @@ export default function LoginPage(): React.JSX.Element {
                         type="password"
                         placeholder="Create a password"
                         required
-                        style={{
-                          paddingLeft: '2.5rem',
-                          textIndent: '0',
-                          position: 'relative',
-                          zIndex: 1
-                        }}
+                        style={{ paddingLeft: "2.5rem" }}
                       />
                     </div>
                   </div>
@@ -295,24 +309,25 @@ export default function LoginPage(): React.JSX.Element {
                     <label htmlFor="register-type">Register As</label>
                     <div className="input-with-icon">
                       <i className="fas fa-user-shield"></i>
-                      <select 
-                        id="register-type" 
+                      <select
+                        id="register-type"
                         name="register-type"
-                        style={{
-                          paddingLeft: '2.5rem',
-                          textIndent: '0',
-                          position: 'relative',
-                          zIndex: 1
-                        }}
+                        style={{ paddingLeft: "2.5rem" }}
                       >
                         <option value="user">User</option>
-                        <option value="hospital">Hospital Representative</option>
+                        <option value="hospital">
+                          Hospital Representative
+                        </option>
                         <option value="admin">Admin</option>
                       </select>
                     </div>
                   </div>
 
-                  <button className="btn btn-primary btn-block" type="submit" disabled={loading}>
+                  <button
+                    className="btn btn-primary btn-block"
+                    type="submit"
+                    disabled={loading}
+                  >
                     {loading ? "Creating account..." : "Create Account"}
                   </button>
                 </form>
