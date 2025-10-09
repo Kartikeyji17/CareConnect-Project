@@ -8,7 +8,7 @@ import { onAuthStateChanged } from "firebase/auth";
 export default function AppLayout(): React.JSX.Element {
   const [userName, setUserName] = useState<string | null>(null);
   const [role, setRole] = useState<
-    "user" | "hospital" | "admin" | "donor" | null
+    "user" | "hospital" | "admin" | null
   >(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -20,6 +20,13 @@ export default function AppLayout(): React.JSX.Element {
         if (auth.currentUser?.email === "admin@careconnect.com") {
           setUserName("Admin");
           setRole("admin");
+          return;
+        }
+
+        // Quick hospital check by email
+        if (auth.currentUser?.email?.includes("hospital")) {
+          setUserName(user.email?.split("@")[0] || "Hospital");
+          setRole("hospital");
           return;
         }
 
