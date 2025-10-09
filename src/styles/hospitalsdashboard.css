@@ -491,4 +491,156 @@
     cursor: not-allowed;
 }
 
- 
+ /* =====================================
+   RESPONSIVE DESIGN (Keep Theme Intact)
+   ===================================== */
+
+ /* ✅ Tablets & Small Laptops (width ≤ 1024px) */
+ @media (max-width: 1024px) {
+     .dashboard-header {
+         flex-direction: column;
+         align-items: flex-start;
+         gap: 12px;
+     }
+
+     .hospital-profile {
+         flex-wrap: wrap;
+         justify-content: flex-start;
+     }
+
+     .dashboard-grid {
+         grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+     }
+
+     .requests-card {
+         position: static;
+         width: 100%;
+     }
+
+     .supplies-card {
+         width: 100%;
+     }
+ }
+
+ /* ✅ Tablets & Large Phones (width ≤ 768px) */
+ @media (max-width: 768px) {
+     .dashboard-header h1 {
+         font-size: 1.8rem;
+         text-align: center;
+     }
+
+     .hospital-name {
+         font-size: 1rem;
+         text-align: center;
+     }
+
+     .stats-grid {
+         grid-template-columns: 1fr 1fr;
+         gap: 16px;
+     }
+
+     .stat-card {
+         padding: 16px;
+         flex-direction: column;
+         text-align: center;
+     }
+
+     .stat-icon {
+         font-size: 2.2rem;
+     }
+
+     .stat-number {
+         font-size: 2rem;
+     }
+
+     .dashboard-grid {
+         grid-template-columns: 1fr;
+     }
+
+     .supplies-card,
+     .requests-card,
+     .notifications-card,
+     .broadcast-card {
+         width: 100%;
+         margin: 10px 0;
+     }
+
+     .supply-control-item {
+         padding: 16px;
+     }
+
+     .broadcast-controls {
+         flex-direction: column;
+         align-items: flex-start;
+         gap: 10px;
+     }
+
+     .form-actions {
+         flex-direction: column;
+         gap: 8px;
+     }
+
+     .btn {
+         width: 100%;
+     }
+ }
+
+ /* ✅ Small Phones (width ≤ 480px) */
+ @media (max-width: 480px) {
+     .dashboard-header {
+         align-items: center;
+         text-align: center;
+     }
+
+     .dashboard-header h1 {
+         font-size: 1.5rem;
+     }
+
+     .stat-card {
+         padding: 12px;
+         gap: 8px;
+     }
+
+     .stat-icon {
+         font-size: 1.8rem;
+     }
+
+     .stat-number {
+         font-size: 1.6rem;
+     }
+
+     .request-item {
+         flex-direction: column;
+         align-items: flex-start;
+         gap: 8px;
+     }
+
+     .request-actions {
+         width: 100%;
+         justify-content: space-between;
+     }
+
+     .notification-item {
+         flex-direction: column;
+         align-items: flex-start;
+         padding: 12px;
+     }
+
+     .broadcast-input {
+         min-height: 60px;
+     }
+
+     .modal-content {
+         padding: 20px;
+     }
+
+     .form-group input,
+     .form-group textarea {
+         font-size: 0.9rem;
+     }
+
+     .btn-sm {
+         font-size: 0.8rem;
+         padding: 5px 10px;
+     }
+ }
