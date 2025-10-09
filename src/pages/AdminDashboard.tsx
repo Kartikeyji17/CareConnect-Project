@@ -179,12 +179,26 @@ export default function AdminDashboard(): React.JSX.Element {
     }
   };
 
-
   const deleteAnnouncement = async (id: string) => {
     try {
       await deleteDoc(doc(db, "announcements", id));
     } catch (err) {
       console.error(err);
+    }
+  };
+
+  // --- Delete Hospital ---
+  const deleteHospital = async (id: string) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this hospital? This action is permanent!"
+    );
+    if (!confirmDelete) return;
+
+    try {
+      await deleteDoc(doc(db, "hospitals", id));
+      console.log(`Hospital ${id} deleted successfully.`);
+    } catch (err) {
+      console.error("Error deleting hospital:", err);
     }
   };
 
@@ -322,6 +336,7 @@ export default function AdminDashboard(): React.JSX.Element {
             <th>Beds</th>
             <th>Medicines</th>
             <th>Status</th>
+            <th>Actions</th> {/* NEW */}
           </tr>
         </thead>
         <tbody>
@@ -334,6 +349,14 @@ export default function AdminDashboard(): React.JSX.Element {
               <td>{h.beds}</td>
               <td>{h.medicines}</td>
               <td>{h.status}</td>
+              <td>
+                <button
+                  className="btn btn-danger"
+                  onClick={() => deleteHospital(h.id)}
+                >
+                  Delete
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
