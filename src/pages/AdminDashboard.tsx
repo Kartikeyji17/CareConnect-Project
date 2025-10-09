@@ -38,7 +38,7 @@ type Hospital = {
   beds: number;
   blood: number;
   oxygen: number;
-  medicines: number;
+  medicine: number;
   status: "active" | "pending" | "deactivated";
 };
 
@@ -49,7 +49,7 @@ type Request = {
   blood: number;
   oxygen: number;
   beds: number;
-  medicines: number;
+  medicine: number;
   status: "Pending" | "Approved" | "Rejected" | "Fulfilled";
 };
 
@@ -101,7 +101,7 @@ export default function AdminDashboard(): React.JSX.Element {
             blood: data.items?.blood || 0,
             oxygen: data.items?.oxygen || 0,
             beds: data.items?.beds || 0,
-            medicines: data.items?.medicine || 0,
+            medicine: data.items?.medicine || 0,
             status: data.status || "Pending",
           } as Request;
         })
@@ -222,17 +222,17 @@ export default function AdminDashboard(): React.JSX.Element {
       acc.blood += r.blood || 0;
       acc.oxygen += r.oxygen || 0;
       acc.beds += r.beds || 0;
-      acc.medicines += r.medicines || 0;
+      acc.medicine += r.medicine || 0;
       return acc;
     },
-    { blood: 0, oxygen: 0, beds: 0, medicines: 0 }
+    { blood: 0, oxygen: 0, beds: 0, medicine: 0 }
   );
 
   const requestChartData = [
     { name: "Blood", quantity: totalResources.blood },
     { name: "Oxygen", quantity: totalResources.oxygen },
     { name: "Beds", quantity: totalResources.beds },
-    { name: "Medicines", quantity: totalResources.medicines },
+    { name: "Medicines", quantity: totalResources.medicine },
   ];
 
   // --- Render ---
@@ -291,7 +291,7 @@ export default function AdminDashboard(): React.JSX.Element {
               <td>{r.blood}</td>
               <td>{r.oxygen}</td>
               <td>{r.beds}</td>
-              <td>{r.medicines}</td>
+              <td>{r.medicine}</td>
               <td>{r.status}</td>
               <td>
                 {r.status === "Pending" && (
@@ -347,7 +347,7 @@ export default function AdminDashboard(): React.JSX.Element {
               <td>{h.blood}</td>
               <td>{h.oxygen}</td>
               <td>{h.beds}</td>
-              <td>{h.medicines}</td>
+              <td>{h.medicine}</td>
               <td>{h.status}</td>
               <td>
                 <button
