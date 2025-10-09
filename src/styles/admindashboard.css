@@ -224,3 +224,160 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* =====================================
+   ADVANCED RESPONSIVE DESIGN (Admin Dashboard)
+   ===================================== */
+
+/* ✅ Tablets & Small Laptops (width ≤ 1024px) */
+@media (max-width: 1024px) {
+    .admin-dashboard {
+        padding: 15px;
+    }
+
+    .cards-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+    }
+
+    .charts-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .dashboard-table th,
+    .dashboard-table td {
+        font-size: 0.9rem;
+        padding: 0.6rem;
+    }
+
+    .announcement-section input {
+        font-size: 0.9rem;
+    }
+}
+
+/* ✅ Tablets & Large Phones (width ≤ 768px) */
+@media (max-width: 768px) {
+    .admin-dashboard h2 {
+        font-size: 1.6rem;
+        margin-bottom: 20px;
+    }
+
+    .cards-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+    }
+
+    .card {
+        padding: 15px;
+    }
+
+    .card h4 {
+        font-size: 0.9rem;
+    }
+
+    .card p {
+        font-size: 1.6rem;
+    }
+
+    .charts-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .chart-card {
+        padding: 15px;
+    }
+
+    .dashboard-table {
+        font-size: 0.85rem;
+    }
+
+    .dashboard-table th,
+    .dashboard-table td {
+        padding: 0.5rem;
+    }
+
+    .announcement-section {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .announcement-section input {
+        width: 100%;
+        font-size: 0.9rem;
+    }
+
+    .announcement-section .btn-primary {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .btn {
+        width: 100%;
+        font-size: 0.85rem;
+    }
+}
+
+/* ✅ Small Phones (width ≤ 480px) */
+@media (max-width: 480px) {
+    .admin-dashboard {
+        padding: 10px;
+    }
+
+    .admin-dashboard h2 {
+        font-size: 1.4rem;
+    }
+
+    .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .card {
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+
+    .card p {
+        font-size: 1.4rem;
+    }
+
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .chart-card {
+        padding: 12px;
+    }
+
+    .dashboard-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .dashboard-table th,
+    .dashboard-table td {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.8rem;
+    }
+
+    .announcement-section {
+        flex-direction: column;
+    }
+
+    .announcement-section input {
+        font-size: 0.85rem;
+    }
+
+    .announcement-section .btn-primary {
+        font-size: 0.85rem;
+        padding: 8px;
+    }
+
+    .announcement-list li {
+        font-size: 0.85rem;
+        padding: 8px;
+    }
+}
