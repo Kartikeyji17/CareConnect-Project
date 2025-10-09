@@ -96,12 +96,12 @@ export default function AdminDashboard(): React.JSX.Element {
           const data = doc.data();
           return {
             id: doc.id,
-            userName: data.userName || "Unknown",
+            userName: data.requesterName || "Unknown",
             hospitalName: data.hospitalName || "Unknown",
-            blood: data.blood || 0,
-            oxygen: data.oxygen || 0,
-            beds: data.beds || 0,
-            medicines: data.medicines || 0,
+            blood: data.items?.blood || 0,
+            oxygen: data.items?.oxygen || 0,
+            beds: data.items?.beds || 0,
+            medicines: data.items?.medicine || 0,
             status: data.status || "Pending",
           } as Request;
         })
