@@ -34,7 +34,7 @@ CareConnect ensures that **no time is wasted when lives are on the line.**
 
 | Category | Technologies |
 |-----------|--------------|
-| 💻 **Frontend** | HTML, CSS, JavaScript |
+| 💻 Frontend | React + TypeScript, CSS / Tailwind |
 | 🔥 **Backend / Database** | Firebase Firestore (NoSQL) |
 | ☁️ **Hosting** | Vercel |
 | 📡 **Realtime Updates** | Firebase `onSnapshot()` |
@@ -100,16 +100,17 @@ Copy code
 ## 🔧 Setup & Installation
 
 ### 1️⃣ Clone Repository
-```bash
+
 git clone https://github.com/yourusername/careconnect.git
 cd careconnect
-2️⃣ Add Firebase Configuration
-Create a firebase.js file:
 
-js
-Copy code
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+# 2. Install dependencies
+npm install
+
+# 3. Add Firebase Configuration
+# Create firebase.ts file in src/
+# Copy your Firebase config here (example below)
+
 
 const firebaseConfig = {
   apiKey: "YOUR_KEY",
@@ -168,3 +169,4 @@ git push origin feature/amazing-feature
 
 “Every second saved in an emergency can save a life —
 CareConnect is built to make those seconds count.”
+
