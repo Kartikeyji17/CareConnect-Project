@@ -71,7 +71,7 @@
     box-shadow: 0 8px 32px rgba(168, 237, 234, 0.3);
 }
 
-.stat-card.medicine {
+.stat-card.ambulance {
     background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
     color: #333;
     box-shadow: 0 8px 32px rgba(255, 236, 210, 0.3);

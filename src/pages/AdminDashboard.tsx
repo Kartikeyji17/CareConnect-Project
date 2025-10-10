@@ -27,7 +27,7 @@ type User = {
   id: string;
   name: string;
   email: string;
-  type: "user" | "hospital" | "donor" | "admin";
+  type: "user" | "hospital" | "admin";
   status: "active" | "banned";
 };
 
@@ -38,7 +38,7 @@ type Hospital = {
   beds: number;
   blood: number;
   oxygen: number;
-  medicine: number;
+  ambulance: number;
   status: "active" | "pending" | "deactivated";
 };
 
@@ -49,7 +49,7 @@ type Request = {
   blood: number;
   oxygen: number;
   beds: number;
-  medicine: number;
+  ambulance: number;
   status: "Pending" | "Approved" | "Rejected" | "Fulfilled";
 };
 
@@ -101,7 +101,7 @@ export default function AdminDashboard(): React.JSX.Element {
             blood: data.items?.blood || 0,
             oxygen: data.items?.oxygen || 0,
             beds: data.items?.beds || 0,
-            medicine: data.items?.medicine || 0,
+            ambulance: data.items?.ambulance || 0,
             status: data.status || "Pending",
           } as Request;
         })
@@ -222,17 +222,17 @@ export default function AdminDashboard(): React.JSX.Element {
       acc.blood += r.blood || 0;
       acc.oxygen += r.oxygen || 0;
       acc.beds += r.beds || 0;
-      acc.medicine += r.medicine || 0;
+      acc.ambulance += r.ambulance || 0;
       return acc;
     },
-    { blood: 0, oxygen: 0, beds: 0, medicine: 0 }
+    { blood: 0, oxygen: 0, beds: 0, ambulance: 0 }
   );
 
   const requestChartData = [
     { name: "Blood", quantity: totalResources.blood },
     { name: "Oxygen", quantity: totalResources.oxygen },
     { name: "Beds", quantity: totalResources.beds },
-    { name: "Medicines", quantity: totalResources.medicine },
+    { name: "Ambulance", quantity: totalResources.ambulance },
   ];
 
   // --- Render ---
@@ -278,7 +278,7 @@ export default function AdminDashboard(): React.JSX.Element {
             <th>Blood</th>
             <th>Oxygen</th>
             <th>Beds</th>
-            <th>Medicines</th>
+            <th>Ambulance</th>
             <th>Status</th>
             <th>Actions</th>
           </tr>
@@ -291,7 +291,7 @@ export default function AdminDashboard(): React.JSX.Element {
               <td>{r.blood}</td>
               <td>{r.oxygen}</td>
               <td>{r.beds}</td>
-              <td>{r.medicine}</td>
+              <td>{r.ambulance}</td>
               <td>{r.status}</td>
               <td>
                 {r.status === "Pending" && (
@@ -334,7 +334,7 @@ export default function AdminDashboard(): React.JSX.Element {
             <th>Blood</th>
             <th>Oxygen</th>
             <th>Beds</th>
-            <th>Medicines</th>
+            <th>Ambulance</th>
             <th>Status</th>
             <th>Actions</th> {/* NEW */}
           </tr>
@@ -347,7 +347,7 @@ export default function AdminDashboard(): React.JSX.Element {
               <td>{h.blood}</td>
               <td>{h.oxygen}</td>
               <td>{h.beds}</td>
-              <td>{h.medicine}</td>
+              <td>{h.ambulance}</td>
               <td>{h.status}</td>
               <td>
                 <button
@@ -393,7 +393,7 @@ export default function AdminDashboard(): React.JSX.Element {
               <Bar dataKey="beds" fill="#43a047" />
               <Bar dataKey="blood" fill="#fbc02d" />
               <Bar dataKey="oxygen" fill="#e53935" />
-              <Bar dataKey="medicines" fill="#8e24aa" />
+              <Bar dataKey="ambulance" fill="#8e24aa" />
             </BarChart>
           </ResponsiveContainer>
         </div>

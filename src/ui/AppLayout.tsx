@@ -257,7 +257,7 @@ export default function AppLayout(): React.JSX.Element {
                     <a>Blood Donation</a>
                   </li>
                   <li>
-                    <a>Medicine Supply</a>
+                    <a>Ambulance Supply</a>
                   </li>
                   <li>
                     <a>Oxygen Supply</a>

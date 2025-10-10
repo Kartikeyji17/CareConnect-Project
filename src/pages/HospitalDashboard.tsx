@@ -17,7 +17,7 @@ import "../styles/hospitalsdashboard.css";
 
 type Supplies = {
   blood: number;
-  medicine: number;
+  ambulance: number;
   oxygen: number;
   beds: number;
 };
@@ -30,7 +30,7 @@ type Request = {
   summary?: string;
   blood?: number;
   oxygen?: number;
-  medicine?: number;
+  ambulance?: number;
   beds?: number;
   details?: string;
 };
@@ -50,7 +50,7 @@ type Notification = {
 export default function HospitalDashboard(): React.JSX.Element {
   const [supplies, setSupplies] = useState<Supplies>({
     blood: 0,
-    medicine: 0,
+    ambulance: 0,
     oxygen: 0,
     beds: 0,
   });
@@ -84,7 +84,7 @@ export default function HospitalDashboard(): React.JSX.Element {
           address: "",
           contact: "",
           blood: 0,
-          medicine: 0,
+          ambulance: 0,
           oxygen: 0,
           beds: 0,
         });
@@ -102,7 +102,7 @@ export default function HospitalDashboard(): React.JSX.Element {
         const data = snap.data();
         setSupplies({
           blood: data.blood ?? 0,
-          medicine: data.medicine ?? 0,
+          ambulance: data.ambulance ?? 0,
           oxygen: data.oxygen ?? 0,
           beds: data.beds ?? 0,
         });
@@ -154,8 +154,8 @@ export default function HospitalDashboard(): React.JSX.Element {
               details.push(`${items.blood} unit(s) blood`);
             if (items.oxygen && items.oxygen > 0)
               details.push(`${items.oxygen} unit(s) oxygen`);
-            if (items.medicine && items.medicine > 0)
-              details.push(`${items.medicine} medicine(s)`);
+            if (items.ambulance && items.ambulance > 0)
+              details.push(`${items.ambulance} ambulance(s)`);
             if (items.beds && items.beds > 0)
               details.push(`${items.beds} bed(s)`);
 
@@ -309,7 +309,7 @@ export default function HospitalDashboard(): React.JSX.Element {
 
         {/* Stats */}
         <div className="stats-grid">
-          {["beds", "blood", "oxygen", "medicine"].map((key) => (
+          {["beds", "blood", "oxygen", "ambulance"].map((key) => (
             <div className={`stat-card ${key}`} key={key}>
               <div className="stat-icon">
                 {key === "beds"
@@ -322,13 +322,13 @@ export default function HospitalDashboard(): React.JSX.Element {
               </div>
               <div className="stat-content">
                 <h3>
-                  {key === "medicine"
-                    ? "Medicine Stock"
+                  {key === "ambulance"
+                    ? "Ambulance Stock"
                     : key.charAt(0).toUpperCase() + key.slice(1)}
                 </h3>
                 <div className="stat-number">
                   {supplies[key as keyof Supplies]}
-                  {key === "medicine" ? "%" : ""}
+                  {key === "ambulance" ? "%" : ""}
                 </div>
               </div>
             </div>
@@ -357,15 +357,15 @@ export default function HospitalDashboard(): React.JSX.Element {
                           : "💊"}
                       </span>
                       <span className="supply-name">
-                        {key === "medicine"
-                          ? "Medicine Stock"
+                        {key === "ambulance"
+                          ? "ambulance Stock"
                           : key.charAt(0).toUpperCase() + key.slice(1)}
                       </span>
                     </div>
                     <div className="supply-value">
                       <span className="current-value">
                         {value}
-                        {key === "medicine" ? "%" : ""}
+                        {key === "ambulance" ? "%" : ""}
                       </span>
                     </div>
                     <div className="supply-buttons">

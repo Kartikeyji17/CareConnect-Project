@@ -16,7 +16,7 @@ type Hospital = {
   distance: number;
   resources: {
     blood: number;
-    medicine: number;
+    ambulance: number;
     oxygen: number;
     beds?: number;
   };
@@ -43,8 +43,8 @@ export default function HospitalsPage(): React.JSX.Element {
   const [needBlood, setNeedBlood] = useState(false);
   const [bloodQty, setBloodQty] = useState(1);
 
-  const [needMedicine, setNeedMedicine] = useState(false);
-  const [medicineQty, setMedicineQty] = useState(1);
+  const [needAmbulance, setNeedAmbulance] = useState(false);
+  const [ambulanceQty, setAmbulanceQty] = useState(1);
 
   const [needOxygen, setNeedOxygen] = useState(false);
   const [oxygenQty, setOxygenQty] = useState(1);
@@ -63,7 +63,7 @@ export default function HospitalsPage(): React.JSX.Element {
         const hospitalList: Hospital[] = snapshot.docs.map((d) => {
           const data = d.data() as Partial<Hospital> & {
             blood?: number;
-            medicine?: number;
+            ambulance?: number;
             oxygen?: number;
             beds?: number;
           };
@@ -76,7 +76,7 @@ export default function HospitalsPage(): React.JSX.Element {
             distance: data.distance ?? 0,
             resources: {
               blood: data.blood ?? 0,
-              medicine: data.medicine ?? 0,
+              ambulance: data.ambulance ?? 0,
               oxygen: data.oxygen ?? 0,
               beds: data.beds ?? 0,
             },
@@ -99,8 +99,8 @@ export default function HospitalsPage(): React.JSX.Element {
     setSelectedHospital(h);
     setNeedBlood(false);
     setBloodQty(1);
-    setNeedMedicine(false);
-    setMedicineQty(1);
+    setNeedAmbulance(false);
+    setAmbulanceQty(1);
     setNeedOxygen(false);
     setOxygenQty(1);
     setNeedBeds(false);
@@ -116,14 +116,14 @@ export default function HospitalsPage(): React.JSX.Element {
 
   const submitRequest = async () => {
     if (!selectedHospital) return;
-    if (!needBlood && !needMedicine && !needOxygen && !needBeds) {
+    if (!needBlood && !needAmbulance && !needOxygen && !needBeds) {
       alert("Please select at least one resource to request.");
       return;
     }
 
     const items: Record<string, number> = {};
     if (needBlood) items.blood = Math.max(1, Math.floor(bloodQty));
-    if (needMedicine) items.medicine = Math.max(1, Math.floor(medicineQty));
+    if (needAmbulance) items.ambulance = Math.max(1, Math.floor(ambulanceQty));
     if (needOxygen) items.oxygen = Math.max(1, Math.floor(oxygenQty));
     if (needBeds) items.beds = Math.max(1, Math.floor(bedsQty));
 
@@ -196,7 +196,7 @@ export default function HospitalsPage(): React.JSX.Element {
           <h1>Find Hospitals</h1>
           <p className="section-description">
             Locate hospitals with available emergency resources like blood,
-            medicine, oxygen and beds. Filter by name, distance, or services.
+            ambulance, oxygen and beds. Filter by name, distance, or services.
           </p>
 
           {/* Filters */}
@@ -229,7 +229,7 @@ export default function HospitalsPage(): React.JSX.Element {
                 >
                   <option value="">All Services</option>
                   <option value="blood">Blood</option>
-                  <option value="medicine">Medicine</option>
+                  <option value="ambulance">Ambulance</option>
                   <option value="oxygen">Oxygen</option>
                   <option value="beds">Beds</option>
                 </select>
@@ -284,13 +284,13 @@ export default function HospitalsPage(): React.JSX.Element {
                       </span>
                       <span
                         className={`service-tag ${
-                          (h.resources?.medicine ?? 0) > 0
+                          (h.resources?.ambulance ?? 0) > 0
                             ? "available"
                             : "unavailable"
                         }`}
                       >
-                        <i className="fas fa-pills"></i> Medicine (
-                        {h.resources?.medicine ?? 0})
+                        <i className="fas fa-pills"></i> Ambulance (
+                        {h.resources?.ambulance ?? 0})
                       </span>
                       <span
                         className={`service-tag ${
@@ -368,18 +368,18 @@ export default function HospitalsPage(): React.JSX.Element {
               <label>
                 <input
                   type="checkbox"
-                  checked={needMedicine}
-                  onChange={(e) => setNeedMedicine(e.target.checked)}
+                  checked={needAmbulance}
+                  onChange={(e) => setNeedAmbulance(e.target.checked)}
                 />{" "}
-                Request Medicine
+                Request Ambulance
               </label>
               <input
                 type="number"
                 min={1}
-                value={medicineQty}
-                disabled={!needMedicine}
+                value={ambulanceQty}
+                disabled={!needAmbulance}
                 onChange={(e) =>
-                  setMedicineQty(Math.max(1, Number(e.target.value)))
+                  setAmbulanceQty(Math.max(1, Number(e.target.value)))
                 }
                 className="qty-input"
               />

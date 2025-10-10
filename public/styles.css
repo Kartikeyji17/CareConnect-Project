@@ -9,7 +9,7 @@
     --muted: #6c757d;
     --border: #333;
     --blood-color: #e53935;
-    --medicine-color: #2196f3;
+    --ambulance-color: #2196f3;
     --oxygen-color: #4caf50;
 }
 
@@ -239,12 +239,12 @@ nav {
     color: var(--blood-color);
 }
 
-.service-icon.medicine {
+.service-icon.ambulance {
     background-color: rgba(33, 150, 243, 0.1);
 }
 
-.service-icon.medicine i {
-    color: var(--medicine-color);
+.service-icon.ambulance i {
+    color: var(--ambulance-color);
 }
 
 .service-icon.oxygen {
