@@ -57,11 +57,12 @@ export default function AboutPage(): React.JSX.Element {
                 <h3>2024</h3>
                 <h4>The Beginning</h4>
                 <p>
-                  EmergencyConnect was founded by Kartikey after he
-                  witnessed firsthand the challenges of accessing critical
-                  medical resources during emergencies. The idea was born out of
-                  a personal experience when his father needed urgent blood
-                  transfusion but faced delays in finding the right blood type.
+                  CareConnect was founded by Kartikey after he witnessed
+                  firsthand the challenges of accessing critical medical
+                  resources during emergencies. The idea was born out of a
+                  personal experience when a close relative of him needed urgent
+                  blood transfusion but faced delays in finding the right blood
+                  type.
                 </p>
               </div>
             </div>
@@ -84,10 +85,10 @@ export default function AboutPage(): React.JSX.Element {
                 <h3>2025</h3>
                 <h4>Expanding Services</h4>
                 <p>
-                  Despite heavy challenges, we expanded our services to
-                  include oxygen and critical medicine supply. Our platform
-                  became a lifeline for thousands of patients who needed urgent
-                  medical resources.
+                  Despite heavy challenges, we expanded our services to include
+                  oxygen and critical medicine supply. Our platform became a
+                  lifeline for thousands of patients who needed urgent medical
+                  resources.
                 </p>
               </div>
             </div>
@@ -147,8 +148,8 @@ export default function AboutPage(): React.JSX.Element {
               <h3>Kartikey Chaturvedi</h3>
               <p className="member-role">Founder & CEO</p>
               <p className="member-bio">
-                Emergency Medicine Specialist with over 15 years of experience.
-                Passionate about improving emergency healthcare access.
+                Information Technology Undergrad at MMMUT Gorakhpur. Passionate
+                about improving emergency healthcare access.
               </p>
               <div className="member-social">
                 <a href="https://www.linkedin.com/in/kartikey-chaturvedi-275b2a349">
@@ -166,8 +167,9 @@ export default function AboutPage(): React.JSX.Element {
               <h3>Anurag Yadav</h3>
               <p className="member-role">Frontend Lead</p>
               <p className="member-bio">
-                Hematologist with expertise in blood banking and transfusion
-                medicine. Leads our medical resource verification team.
+                Information Technology Undergrad at MMMUT Gorakhpur. Laid the
+                foundations of the website with interactive design. Wellfully
+                handled all the frontend experience.
               </p>
               <div className="member-social">
                 <a href="https://www.linkedin.com/in/anurag-yadav-b54890326/">
@@ -185,7 +187,9 @@ export default function AboutPage(): React.JSX.Element {
               <h3>Aditya Singh Kshatri</h3>
               <p className="member-role">Backend Manager</p>
               <p className="member-bio">
-                Tech innovator with a background in healthcare IT. Leads the
+                Information Technology Undergrad at MMMUT Gorakhpur. Tech
+                innovator and Backend Expert with a great expert in handling
+                APIs, requests and database management. Leads the backend
                 development of our platform and mobile applications.
               </p>
               <div className="member-social">

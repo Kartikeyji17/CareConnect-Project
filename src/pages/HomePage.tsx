@@ -111,7 +111,9 @@ export default function HomePage(): React.JSX.Element {
             in need during medical emergencies.
           </p>
           <div className="cta-buttons">
-            <a className="btn btn-primary">Register Now</a>
+            <Link to="/login" className="btn btn-primary">
+              Register Now
+            </Link>
             <Link to="/contact" className="btn btn-outline">
               Contact Us
             </Link>
