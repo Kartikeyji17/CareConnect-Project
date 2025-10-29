@@ -14,6 +14,7 @@ import UserDashboard from './pages/UserDashboard'
 import AdminDashboard from './pages/AdminDashboard'
 import HospitalDashboard from './pages/HospitalDashboard'
 import RequestsPage from './pages/RequestsPage'
+import EmergencyServicesPage from './pages/emergencyServices'
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
       { path: 'admin-dashboard', element: <AdminDashboard /> },
       { path: 'hospital-dashboard', element: <HospitalDashboard /> },
       { path: 'requests', element: <RequestsPage /> },
+      { path: 'emergency', element: <EmergencyServicesPage /> },
     ],
   },
 ])

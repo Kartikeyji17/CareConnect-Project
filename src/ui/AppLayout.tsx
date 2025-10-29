@@ -7,9 +7,7 @@ import { onAuthStateChanged } from "firebase/auth";
 
 export default function AppLayout(): React.JSX.Element {
   const [userName, setUserName] = useState<string | null>(null);
-  const [role, setRole] = useState<
-    "user" | "hospital" | "admin" | null
-  >(null);
+  const [role, setRole] = useState<"user" | "hospital" | "admin" | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -121,7 +119,9 @@ export default function AppLayout(): React.JSX.Element {
                   Log In
                 </NavLink>
               )}
-              <button className="btn btn-primary">Emergency Help</button>
+              <NavLink to="/emergency" className="btn btn-primary">
+                Emergency Help
+              </NavLink>
             </div>
 
             {/* Mobile Hamburger */}
@@ -231,7 +231,9 @@ export default function AppLayout(): React.JSX.Element {
                   Log In
                 </NavLink>
               )}
-              <button className="btn btn-primary">Emergency Help</button>
+              <NavLink to="/emergency" className="btn btn-primary">
+                Emergency Help
+              </NavLink>
             </div>
           </div>
         )}
