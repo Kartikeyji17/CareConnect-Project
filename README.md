@@ -163,9 +163,5 @@ Please ensure all contributions align with project goals and coding standards.
 “Every second saved in an emergency can save a life —
 CareConnect is built to make those seconds count.”
 
-<div align="center">
+
 🩺 Built with ❤️, Code, and Care for a Healthier Tomorrow.
-
-
-
-</div> ```
