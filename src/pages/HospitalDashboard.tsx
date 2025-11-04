@@ -328,7 +328,7 @@ export default function HospitalDashboard(): React.JSX.Element {
                 </h3>
                 <div className="stat-number">
                   {supplies[key as keyof Supplies]}
-                  {key === "ambulance" ? "%" : ""}
+                  {key === "ambulance"}
                 </div>
               </div>
             </div>
@@ -365,7 +365,7 @@ export default function HospitalDashboard(): React.JSX.Element {
                     <div className="supply-value">
                       <span className="current-value">
                         {value}
-                        {key === "ambulance" ? "%" : ""}
+                        {key === "ambulance"}
                       </span>
                     </div>
                     <div className="supply-buttons">
